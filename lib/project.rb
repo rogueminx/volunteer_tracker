@@ -45,4 +45,8 @@ class Project
     found_project
   end
 
+  def volunteers
+
+  end
+
 end #Project
