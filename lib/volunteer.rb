@@ -8,16 +8,8 @@ class Volunteer
     @id = attributes.fetch(:id)
   end #initialize
 
-  def name
-    @name
-  end
-
-  def project_id
-    @project_id
-  end
-
   def == (another_volunteer)
-      self.name().==(another_volunteer.name()).&(self.id().==(another_volunteer.id()))
+      self.name().==(another_volunteer.name()).&(self.project_id().==(another_volunteer.project_id())).&(self.id().==(another_volunteer.id()))
   end
 
   def save
@@ -30,21 +22,19 @@ class Volunteer
     volunteers = []
     returned_volunteers.each() do |volunteer|
       name = volunteer.fetch("name")
-      id = volunteer.fetch("id").to_i()
       project_id = volunteer.fetch("project_id").to_i()
+      id = volunteer.fetch("id").to_i()
       volunteers.push(Volunteer.new({:name => name, :project_id => project_id, :id => id}))
     end
   volunteers
   end
 
   def self.find(entered_id)
-    found_volunteer = nil
-    Volunteer.all().each() do |volunteer|
-      if volunteer.id().==(entered_id)
-        found_volunteer = volunteer
-      end
-    end
-    found_volunteer
+    result = DB.exec("SELECT * FROM volunteers WHERE id = #{entered_id};")
+    name = result.first().fetch("name")
+    project_id = result.first().fetch("project_id").to_i()
+    id = result.first().fetch("id").to_i()
+    Volunteer.new({:name => name, :project_id => project_id, :id => id})
   end
 
 end #Volunteer
