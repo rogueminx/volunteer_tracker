@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @current_project.title %></title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <div class="container">
+    <h1><%= @current_project.title %></h1>
+    <hr>
+    <p> How would you like to edit this project?</p>
+    <div class="form">
+      <form action="/projects/<%= @current_project.id() %>" method="post">
+        <input name="_method" type="hidden" value="patch">
+        <label for="title">Change project's name:</label>
+        <input id="title" name="title" type="text">
+        <p></p>
+        <button type="submit">Update Project</button>
+      </form>
+    </div>
+
+    <hr>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= @current_project.title %></title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <div class="container">
+    <h1><%= @current_project.title %></h1>
+    <hr>
+    <p> What would you like to do today?</p>
+    <p><a href="/projects/<%= @current_project.id() %>/edit">Edit Project</a></p>
+
+    <hr>
+    </div>
+  </body>
+</html>
