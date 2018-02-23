@@ -18,7 +18,14 @@
         <button type="submit">Update Project</button>
       </form>
     </div>
-
+    <hr>
+    <p>Warning: This button will delete the project.</p>
+    <div class="form">
+      <form action="/projects/<%= @current_project.id() %>" method="post">
+        <input name="_method" type="hidden" value="delete">
+        <button type="submit">Delete Project</button>
+      </form>
+    </div>
     <hr>
     </div>
   </body>
