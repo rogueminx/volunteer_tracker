@@ -6,10 +6,10 @@ class Volunteer
     @name = attributes.fetch(:name)
     @project_id = attributes.fetch(:project_id)
     @id = attributes.fetch(:id)
-  end #initialize
+  end
 
   def == (another_volunteer)
-      self.name().==(another_volunteer.name()).&(self.project_id().==(another_volunteer.project_id())).&(self.id().==(another_volunteer.id()))
+    self.name().==(another_volunteer.name()).&(self.project_id().==(another_volunteer.project_id())).&(self.id().==(another_volunteer.id()))
   end
 
   def save
@@ -36,5 +36,4 @@ class Volunteer
     id = result.first().fetch("id").to_i()
     Volunteer.new({:name => name, :project_id => project_id, :id => id})
   end
-
-end #Volunteer
+end

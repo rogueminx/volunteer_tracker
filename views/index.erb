@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Volunteer Tracker</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+  </head>
+  <body>
+    <div class="container">
+    <h1>Welcome to the Volunteer Tracker!</h1>
+    <hr>
+    <p>Use the form below to add a new project to the database.</p>
+      <div class="form">
+        <form action="/addproject" method="post">
+          <label for="title">Project's name:</label>
+          <input id="title" name="title" type="text">
+          <p></p>
+          <button type="submit">Create Project</button>
+        </form>
+      </div>
+      <hr>
+      <h3>Current Projects</h3>
+      <% if @projects != 0 %>
+      <ul>
+        <% @projects.each do |project| %>
+        <li><a href="/projects/<%= project.id() %>"><%= project.title() %></a></li>
+        <% end %>
+      <% else %>
+      <p>Add a project to populate this list. </p>
+      <% end %>
+      </ul>
+    </div>
+  </body>
+</html>
