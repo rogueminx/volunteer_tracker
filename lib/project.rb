@@ -25,14 +25,24 @@ class Project
   end
 
   def self.all
-  returned_projects = DB.exec("SELECT * FROM projects;")
-  projects = []
-  returned_projects.each() do |project|
-    title = project.fetch("title")
-    id = project.fetch("id").to_i()
-    projects.push(Project.new({:title => title, :id => id}))
-  end
+    returned_projects = DB.exec("SELECT * FROM projects;")
+    projects = []
+    returned_projects.each() do |project|
+      title = project.fetch("title")
+      id = project.fetch("id").to_i()
+      projects.push(Project.new({:title => title, :id => id}))
+    end
   projects
+  end
+
+  def self.find(entered_id)
+    found_project = nil
+    Project.all().each() do |project|
+      if project.id().==(entered_id)
+        found_project = project
+      end
+    end
+    found_project
   end
 
 end #Project
