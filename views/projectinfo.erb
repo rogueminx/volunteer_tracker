@@ -26,7 +26,7 @@
         <h4>Add a new volunteer to a project</h4>
         <div class="form">
           <form action="/projects/<%= @current_project.id %>" method="post">
-            <input id="@current_project_id" name="@current_project_id" type="hidden" value="<%= @current_project.id() %>">
+            <input id="project_id" name="project_id" type="hidden" value="<%= @current_project.id() %>">
             <label for="name">Enter volunteer's name:</label>
             <input id="name" name="name" type="text">
             <button type="submit">Add Volunteer</button>

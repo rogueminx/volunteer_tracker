@@ -36,13 +36,13 @@ post("/addproject") do
   erb(:index)
 end
 
-post('/projects/:id') do
-  @current_project = Project.find(params['id'].to_i)
-  name = params['name']
-  project_id = params['project_id'].to_i
+post('/projects/:id') do # question - do you have to use an :id tag like this in a form when you need to keep the "id" to pass on to the next page? I originally tried to name use ('/addvolunteer') and it did broke.
+  @current_project = Project.find(params.fetch("id").to_i)
+  name = params.fetch("name")
+  project_id = params.fetch("project_id").to_i
   new_volunteer = Volunteer.new({:name => name, :project_id => project_id, :id => nil})
   new_volunteer.save
-  @volunteers = Volunteer.all
+  @volunteers = @current_project.volunteers # Does this pass info onto the next page as well?
   erb(:projectinfo)
 end
 
@@ -52,6 +52,7 @@ patch ("/volunteer/:id") do
   id = params.fetch("id")
   volunteer = Volunteer.new({:name => name, :project_id => project_id, :id => nil})
   volunteer.save()
+  @current_volunteer = Volunteer.find(params.fetch("id").to_i)
   erb(:projectinfo)
 end
 
@@ -59,13 +60,13 @@ patch("/projects/:id") do
   title = params.fetch("title")
   @current_project = Project.find(params.fetch("id").to_i())
   @current_project.update({:title => title})
-  @volunteers = Volunteer.all()
+  @volunteers = @current_project.volunteers
   erb(:projectinfo)
 end
 
 patch('/volunteers/:id') do
   name = params.fetch("name")
-  @current_volunteer = Volunteer.find(params['id'].to_i)
+  @current_volunteer = Volunteer.find(params.fetch('id').to_i)
   @current_volunteer.update({:name => name})
   erb(:editvolunteer)
 end
