@@ -77,3 +77,10 @@ delete("/projects/:id") do
   @projects = Project.all()
   erb(:index)
 end
+
+delete("/volunteers/:id") do
+  @current_volunteer = Volunteer.find(params.fetch("id").to_i())
+  @current_volunteer.delete()
+  @projects = Project.all()
+  erb(:index)
+end
