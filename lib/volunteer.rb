@@ -36,4 +36,10 @@ class Volunteer
     id = result.first().fetch("id").to_i()
     Volunteer.new({:name => name, :project_id => project_id, :id => id})
   end
+
+  def update (attributes)
+    @name = attributes.fetch(:name)
+    @id = self.id()
+    DB.exec("UPDATE volunteers SET name = '#{@name}' WHERE id = #{@id};")
+  end
 end

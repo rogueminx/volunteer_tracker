@@ -7,10 +7,37 @@
   <body>
     <div class="container">
     <h1><%= @current_project.title %></h1>
-    <hr>
     <p> What would you like to do today?</p>
-    <p><a href="/projects/<%= @current_project.id() %>/edit">Edit Project</a></p>
-
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <h4>Current Volunteers</h4>
+        <% if @volunteers != 0 %>
+        <ul>
+          <% @volunteers.each do |volunteer| %>
+          <li><a href="/volunteers/<%= volunteer.id() %>"><%= volunteer.name() %></a></li>
+          <% end %>
+          <% else %>
+          <p>There are no volunteers signed up for this project.</p>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h4>Add a new volunteer to a project</h4>
+        <div class="form">
+          <form action="/projects/<%= @current_project.id %>" method="post">
+            <input id="@current_project_id" name="@current_project_id" type="hidden" value="<%= @current_project.id() %>">
+            <label for="name">Enter volunteer's name:</label>
+            <input id="name" name="name" type="text">
+            <button type="submit">Add Volunteer</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h4><a href="/projects/<%= @current_project.id() %>/edit">Edit Project</a></h4>
+        <p>Click the link above to change a project's name or remove a project from the database.</p>
+      </div>
+    </div>
     <hr>
     </div>
   </body>
