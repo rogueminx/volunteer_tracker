@@ -5,7 +5,7 @@ class Project
   def initialize(attributes)
     @title = attributes.fetch(:title)
     @id = attributes.fetch(:id)
-  end #initialize
+  end 
 
   def save
     result = DB.exec("INSERT INTO projects (title) VALUES ('#{@title}') RETURNING id;")
@@ -57,4 +57,4 @@ class Project
     DB.exec("DELETE FROM volunteers WHERE project_id = #{self.id()};")
   end
 
-end #Project
+end
